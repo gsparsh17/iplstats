@@ -29,21 +29,26 @@ const Matches = () => {
     const interval = setInterval(() => {
       fetchLiveMatches();
       fetchUpcomingMatches();
-    }, 10000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="p-8 bg-gray-900 min-h-screen text-white">
       <h1 className="text-4xl font-bold text-center mb-10 text-yellow-400">🏏 Cricket Matches</h1>
-      
+
       {/* Live Matches */}
       <section>
         <h2 className="text-2xl font-semibold mb-6 border-b border-yellow-400 pb-2">🔥 Live Matches</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {liveMatches.length > 0 ? (
             liveMatches.map((match, index) => (
-              <div key={index} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
+              <div key={index} className="relative bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                {/* Blinking Red LIVE Tag */}
+                <div className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded animate-pulse">
+                  LIVE 🔴
+                </div>
+
                 <h3 className="text-xl font-semibold text-yellow-300">{match.team1} 🆚 {match.team2}</h3>
                 <p className="text-gray-300 mt-2">📅 {match.date_time}</p>
                 <p className="text-green-400 font-bold mt-1">{match.status}</p>
